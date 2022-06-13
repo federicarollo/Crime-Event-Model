@@ -1,0 +1,578 @@
+@prefix : <https://dbgroup.ing.unimo.it/cem#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sem: <http://semanticweb.cs.vu.nl/2009/11/sem/> .
+@prefix cem: <https://dbgroup.ing.unimo.it/cem#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <https://dbgroup.ing.unimo.it/cem> .
+
+<https://dbgroup.ing.unimo.it/cem> rdf:type owl:Ontology ;
+                                   rdfs:comment "The Crime Event Model is an ontology for the representation of crime events extracted from local newspapers. It could be employed for Crime Analysis purposes: extracting crime information from newspapers and enriching them with proper machine-readable semantics is a critical task to help law enforcement agencies at preventing crime, supporting criminal investigations and evaluating the action of law enforcement agencies themselves. The model is based on the fundamental 5W1H journalistic questions, that are Who?, What?, When?, Where?, Why? and How?. Another important requirement was the attempt to exploit existing knowledge graphs and ontologies such as the Simple Event Model (SEM) Ontology and the Schema.org data model for interoperability and interconnection."@en ;
+                                   rdfs:label "Crime Event Model (CEM)"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/description
+dcterms:description rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#broadMatch
+<http://www.w3.org/2004/02/skos/core#broadMatch> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#closeMatch
+<http://www.w3.org/2004/02/skos/core#closeMatch> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#exactMatch
+<http://www.w3.org/2004/02/skos/core#exactMatch> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#narrowMatch
+<http://www.w3.org/2004/02/skos/core#narrowMatch> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://schema.org/articleBody
+schema:articleBody rdf:type owl:ObjectProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( schema:Article
+                                             )
+                               ] ;
+                   rdfs:range [ rdf:type owl:Class ;
+                                owl:unionOf ( schema:Text
+                                              schema:URL
+                                            )
+                              ] ;
+                   rdfs:comment "The actual body of the article."@en ;
+                   rdfs:isDefinedBy <https://schema.org/articleBody> ;
+                   rdfs:label "articleBody"@en .
+
+
+###  http://schema.org/containedInPlace
+schema:containedInPlace rdf:type owl:ObjectProperty ;
+                        owl:inverseOf schema:containsPlace ;
+                        rdfs:domain [ rdf:type owl:Class ;
+                                      owl:unionOf ( schema:Place
+                                                  )
+                                    ] ;
+                        rdfs:range [ rdf:type owl:Class ;
+                                     owl:unionOf ( schema:Place
+                                                   schema:Text
+                                                   schema:URL
+                                                 )
+                                   ] ;
+                        rdfs:comment "The basic containment relation between a place and one that contains it."@en ;
+                        rdfs:isDefinedBy <https://schema.org/containedInPlace> ;
+                        rdfs:label "containedInPlace"@en .
+
+
+###  http://schema.org/containsPlace
+schema:containsPlace rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/datePublished
+schema:datePublished rdf:type owl:ObjectProperty ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( schema:CreativeWork
+                                               )
+                                 ] ;
+                     rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( schema:Date
+                                                schema:DateTime
+                                              )
+                                ] ;
+                     rdfs:comment "Date of first broadcast/publication."@en ;
+                     rdfs:isDefinedBy <https://schema.org/datePublished> ;
+                     rdfs:label "datePublished"@en .
+
+
+###  http://schema.org/headline
+schema:headline rdf:type owl:ObjectProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( schema:CreativeWork
+                                          )
+                            ] ;
+                rdfs:range [ rdf:type owl:Class ;
+                             owl:unionOf ( schema:Text
+                                           schema:URL
+                                         )
+                           ] ;
+                rdfs:comment "Headline of the article."@en ;
+                rdfs:isDefinedBy <https://schema.org/headline> ;
+                rdfs:label "headline"@en .
+
+
+###  http://schema.org/inLanguage
+schema:inLanguage rdf:type owl:ObjectProperty ;
+                  rdfs:domain schema:CreativeWork ;
+                  rdfs:range [ rdf:type owl:Class ;
+                               owl:unionOf ( schema:Language
+                                             schema:Text
+                                             schema:URL
+                                           )
+                             ] ;
+                  rdfs:comment "The language of the content or performance or used in an action. Please use one of the language codes from the <a href=\"http://tools.ietf.org/html/bcp47\">IETF BCP 47 standard</a>. See also <a class=\"localLink\" href=\"http://schema.org/availableLanguage\">availableLanguage</a>."@en ;
+                  rdfs:isDefinedBy <https://schema.org/inLanguage> ;
+                  rdfs:label "inLanguage"@en .
+
+
+###  http://schema.org/mentions
+schema:mentions rdf:type owl:ObjectProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( schema:CreativeWork
+                                          )
+                            ] ;
+                rdfs:range [ rdf:type owl:Class ;
+                             owl:unionOf ( schema:Text
+                                           schema:Thing
+                                           schema:URL
+                                           owl:Thing
+                                         )
+                           ] ;
+                rdfs:comment "Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept."@en ;
+                rdfs:isDefinedBy <https://schema.org/mentions> ;
+                rdfs:label "mentions"@en .
+
+
+###  http://schema.org/publisher
+schema:publisher rdf:type owl:ObjectProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( schema:CreativeWork
+                                           )
+                             ] ;
+                 rdfs:range [ rdf:type owl:Class ;
+                              owl:unionOf ( schema:Organization
+                                            schema:Person
+                                            schema:Text
+                                            schema:URL
+                                          )
+                            ] ;
+                 rdfs:comment "The publisher of the creative work."@en ;
+                 rdfs:isDefinedBy <https://schema.org/publisher> ;
+                 rdfs:label "publisher"@en .
+
+
+###  http://schema.org/url
+schema:hasurl rdf:type owl:ObjectProperty ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( schema:Thing
+                                     )
+                       ] ;
+           rdfs:range [ rdf:type owl:Class ;
+                        owl:unionOf ( schema:Text
+                                      schema:URL
+                                    )
+                      ] ;
+           rdfs:comment "URL of the item."@en ;
+           rdfs:isDefinedBy <https://schema.org/url> ;
+           rdfs:label "url"@en .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/eventProperty
+sem:eventProperty rdf:type owl:ObjectProperty ;
+                  rdfs:comment "Event properties connect Events to other SEM Core entities."@en ;
+                  rdfs:label "event property" .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/hasActor
+sem:hasActor rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf sem:eventProperty ;
+             rdfs:domain sem:Event ;
+             rdfs:range sem:Actor ;
+             rdfs:comment "Has actor is used to state which Actors or Objects participate in an Event."@en ;
+             rdfs:label "has Actor" ;
+             <http://www.w3.org/2004/02/skos/core#exactMatch> <http://linkedevents.org/ontology/involved> ;
+             <http://www.w3.org/2004/02/skos/core#narrowMatch> <http://www.kulttuurisampo.fi/ebkr/agent> .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/hasPlace
+sem:hasPlace rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf sem:eventProperty ;
+             rdfs:domain sem:Event ;
+             rdfs:range sem:Place ;
+             rdfs:comment "Has place is used to state in which Place(s) an Event happened. Coordinates can be attached to the Place with the W3C Geospatial Vocabulary (http://www.w3.org/2005/Incubator/geo/XGR-geo-20071023/)." ;
+             rdfs:label "has Place" ;
+             <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.kulttuurisampo.fi/ebkr/place> ;
+             <http://www.w3.org/2004/02/skos/core#narrowMatch> <http://linkedevents.org/ontology/inSpace> .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/hasSubEvent
+sem:hasSubEvent rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf sem:eventProperty ;
+                owl:inverseOf sem:subEventOf ;
+                rdfs:domain sem:Event ;
+                rdfs:range sem:Event ;
+                rdfs:comment "Has subevent connects an Event to other Events that belong to it. This is a very generic property that does not mean the subevents fully define the superconcept or that there is any causal relationship." ;
+                rdfs:label "has subevent" ;
+                <http://www.w3.org/2004/02/skos/core#exactMatch> <http://purl.org/NET/c4dm/event.owl#sub_event> .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/hasTime
+sem:hasTime rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf sem:eventProperty ;
+            rdfs:domain sem:Event ;
+            rdfs:range sem:Time ;
+            rdfs:comment "Has time is used to indicate at which time an Event took place or when a property under the Temporary Constraint is valid. Has time points to a symbolic representation of time, which allows semantic relations between time resources. (see http://www.w3.org/TR/owl-time/)" ;
+            rdfs:label "has Time" ;
+            <http://www.w3.org/2004/02/skos/core#broadMatch> <http://linkedevents.org/ontology/atTime> .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/subEventOf
+sem:subEventOf rdf:type owl:ObjectProperty ;
+               rdfs:comment "Inverse property of hasSubEvent" ;
+               rdfs:label "subevent of" .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/subTypeOf
+sem:subTypeOf rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf rdfs:subClassOf ;
+              rdfs:comment "The inverse property of hasSubType." ;
+              rdfs:label "subtype of" .
+
+
+###  https://dbgroup.ing.unimo.it/cem#hasAuthor
+cem:hasAuthor rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf sem:hasActor ;
+              rdfs:domain cem:CrimeEvent ;
+              rdfs:range sem:Actor ;
+              rdfs:comment "Used to state the author(s) of the crime event."@en .
+
+
+###  https://dbgroup.ing.unimo.it/cem#hasOtherSubject
+cem:hasOtherSubject rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf sem:hasActor ;
+                    rdfs:domain cem:CrimeEvent ;
+                    rdfs:range sem:Actor ;
+                    rdfs:comment "Used to state other subject(s) involved in the crime event (e.g., law enforcement agencies)."@en .
+
+
+###  https://dbgroup.ing.unimo.it/cem#hasVictim
+cem:hasVictim rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf sem:hasActor ;
+              rdfs:domain cem:CrimeEvent ;
+              rdfs:range sem:Actor ;
+              rdfs:comment "Used to state the victim(s) of the crime event."@en .
+
+
+###  http://www.w3.org/2000/01/rdf-schema#subClassOf
+rdfs:subClassOf rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/hasBeginTimeStamp
+sem:hasBeginTimeStamp rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf sem:hasTimeStamp ;
+                      rdfs:comment "Has begin timestamp is used to indicate the beginning of a time interval. Omitting the hasBeginTimeStamp while stating a hasEndTimeStamp is interpreted as an open ended interval."@en ;
+                      rdfs:label "has begin timestamp" .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/hasEndTimeStamp
+sem:hasEndTimeStamp rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf sem:hasTimeStamp ;
+                    rdfs:comment "Has end timestamp is used to indicate the end of a time interval. Omitting the hasEndTimeStamp while stating a hasBeginTimeStamp is interpreted as an open ended interval."@en ;
+                    rdfs:label "has end timestamp" .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/hasTimeStamp
+sem:hasTimeStamp rdf:type owl:DatatypeProperty ;
+                 rdfs:range xsd:dateTimeStamp ;
+                 rdfs:comment "Has timestamp is used to put time indicators on any individual. It is the most common way to state when an Event took place. There are subproperties of hasTimeStamp to represent time intervals and uncertain time intervals. If the exact moment is not known, but it is necessary to specify a certain time, use hasTime instead. All of these properties are also used to indicate the time at which a property under the Temporary Constraint is valid."@en ;
+                 rdfs:label "has timestamp" ;
+                 <http://www.w3.org/2004/02/skos/core#closeMatch> <http://www.kulttuurisampo.fi/ebkr/time> .
+
+
+###  https://dbgroup.ing.unimo.it/cem#how
+cem:how rdf:type owl:DatatypeProperty ;
+        rdfs:domain cem:CrimeEvent ;
+        rdfs:range xsd:string ;
+        rdfs:comment "Property to express how the crime event has been accomplished."@en .
+
+
+###  https://dbgroup.ing.unimo.it/cem#success
+cem:success rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain cem:CrimeEvent ;
+            rdfs:range xsd:boolean ;
+            rdfs:comment "Property to manifest if the crime event has been successful."@en .
+
+
+###  https://dbgroup.ing.unimo.it/cem#why
+cem:why rdf:type owl:DatatypeProperty ;
+        rdfs:domain cem:CrimeEvent ;
+        rdfs:range xsd:string ;
+        rdfs:comment "Property to express the crime event motive."@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://schema.org/Article
+schema:Article rdf:type owl:Class ;
+               rdfs:subClassOf schema:CreativeWork .
+
+
+###  http://schema.org/CreativeWork
+schema:CreativeWork rdf:type owl:Class ;
+                    rdfs:subClassOf schema:Thing .
+
+
+###  http://schema.org/DataType
+schema:DataType rdf:type owl:Class ;
+                owl:disjointWith sem:Core .
+
+
+###  http://schema.org/Date
+schema:Date rdf:type owl:Class ;
+            rdfs:subClassOf schema:DataType ;
+            rdfs:comment "A date value in <a href=\"http://en.wikipedia.org/wiki/ISO_8601\">ISO 8601 date format</a>."@en ;
+            rdfs:isDefinedBy <https://schema.org/Date> ;
+            rdfs:label "Date"@en .
+
+
+###  http://schema.org/DateTime
+schema:DateTime rdf:type owl:Class ;
+                rdfs:subClassOf schema:DataType ;
+                rdfs:comment "A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm] (see Chapter 5.4 of ISO 8601)."@en ;
+                rdfs:isDefinedBy <https://schema.org/DateTime> ;
+                rdfs:label "DateTime"@en .
+
+
+###  http://schema.org/Language
+schema:Language rdf:type owl:Class ;
+                rdfs:subClassOf schema:Thing .
+
+
+###  http://schema.org/NewsArticle
+schema:NewsArticle rdf:type owl:Class ;
+                   rdfs:subClassOf schema:Article ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty schema:mentions ;
+                                     owl:someValuesFrom cem:CrimeEvent
+                                   ] ;
+                   rdfs:comment """A NewsArticle is an article whose content reports news, or provides background context and supporting materials for understanding the news.<br/><br/>
+
+A more detailed overview of <a href=\"/docs/news.html\">schema.org News markup</a> is also available."""@en ;
+                   rdfs:isDefinedBy <https://schema.org/NewsArticle> ;
+                   rdfs:label "NewsArticle"@en .
+
+
+###  http://schema.org/Organization
+schema:Organization rdf:type owl:Class ;
+                    rdfs:subClassOf schema:Thing .
+
+
+###  http://schema.org/Person
+schema:Person rdf:type owl:Class ;
+              rdfs:subClassOf schema:Thing .
+
+
+###  http://schema.org/Place
+schema:Place rdf:type owl:Class ;
+             owl:equivalentClass sem:Place ;
+             rdfs:subClassOf schema:Thing .
+
+
+###  http://schema.org/Text
+schema:Text rdf:type owl:Class ;
+            rdfs:subClassOf schema:DataType ;
+            rdfs:comment "Data type: Text."@en ;
+            rdfs:isDefinedBy <https://schema.org/Text> ;
+            rdfs:label "Text"@en .
+
+
+###  http://schema.org/Thing
+schema:Thing rdf:type owl:Class ;
+             owl:equivalentClass owl:Thing .
+
+
+###  http://schema.org/URL
+schema:URL rdf:type owl:Class ;
+           rdfs:subClassOf schema:Text .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/Actor
+sem:Actor rdf:type owl:Class ;
+          rdfs:subClassOf sem:Core ;
+          rdfs:comment """Actors are entities that take part in an Event, either actively or passively. Actors do not necessarily have to be sentient. They can also be objects. Actors are a thing, animate or inanimate, physical or non-physical.
+""" ;
+          rdfs:label "Actor" ;
+          <http://www.w3.org/2004/02/skos/core#broadMatch> <http://sw.opencyc.org/2009/04/07/concept/en/SomethingExisting> ,
+                                                           <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#endurant> ;
+          <http://www.w3.org/2004/02/skos/core#closeMatch> dcterms:Agent ,
+                                                           dcterms:AgentClass ,
+                                                           <http://sw.opencyc.org/2009/04/07/concept/en/Agent-Generic> ,
+                                                           <http://www.ontologyportal.org/translations/SUMO.owl.txt#Agent> ,
+                                                           <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E39.Actor> ,
+                                                           <http://xmlns.com/foaf/0.1/Agent> .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/Core
+sem:Core rdf:type owl:Class ;
+         rdfs:comment "The SEM Core class contains all entities that make up the context of an event: Events, Actors, Places, Times. This class is meant to be extended for each application domain." ;
+         rdfs:label "Core" .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/Event
+sem:Event rdf:type owl:Class ;
+          rdfs:subClassOf sem:Core ;
+          rdfs:comment "Events are things that happen. This comprises everything from historical events to web site sessions and mythical journeys. Event is the central class of SEM." ;
+          rdfs:label "Event" ;
+          <http://www.w3.org/2004/02/skos/core#broadMatch> <http://linkedevents.org/ontology/Event> ,
+                                                           <http://purl.org/NET/c4dm/event.owl#Event> ;
+          <http://www.w3.org/2004/02/skos/core#closeMatch> <http://purl.org/dc/dcmitype/Event> ,
+                                                           <http://sw.opencyc.org/2009/04/07/concept/en/Situation> ,
+                                                           <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#perdurant> ,
+                                                           <http://www.ontologyportal.org/translations/SUMO.owl.txt#Process> ,
+                                                           <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E5.Event> .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/Place
+sem:Place rdf:type owl:Class ;
+          rdfs:subClassOf sem:Core ;
+          rdfs:comment "Places are locations where an Event happens. They do not need to be physical places and hence do not necessarily need coordinates. Neither do they need to have any significance apart from them being the location of an Event." ;
+          rdfs:label "Place" ;
+          <http://www.w3.org/2004/02/skos/core#closeMatch> dcterms:Location ,
+                                                           <http://sw.opencyc.org/2009/04/07/concept/en/EnduringThing-Localized> ,
+                                                           <http://www.ontologyportal.org/translations/SUMO.owl.txt#GeographicArea> ,
+                                                           <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E53.Place> ;
+          <http://www.w3.org/2004/02/skos/core#narrowMatch> <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#PhysicalRegion> ,
+                                                            <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> .
+
+
+###  http://semanticweb.cs.vu.nl/2009/11/sem/Time
+sem:Time rdf:type owl:Class ;
+         rdfs:subClassOf sem:Core ;
+         rdfs:comment "Time contains symbolic representations of when an Event took place. Time instances do not necessarily need to have a timestamp associated with them. The Time class exists to represent semantics of time, e.g. that one thing happens before another, even though the exact timestamps are unknown." ;
+         rdfs:label "Time" ;
+         <http://www.w3.org/2004/02/skos/core#broadMatch> <http://www.w3.org/2006/timeTemporalEntity> .
+
+
+###  https://dbgroup.ing.unimo.it/cem#CrimeEvent
+cem:CrimeEvent rdf:type owl:Class ;
+          rdfs:subClassOf sem:Event ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty cem:hasAuthor ;
+                            owl:someValuesFrom sem:Actor
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty cem:hasOtherSubject ;
+                            owl:someValuesFrom sem:Actor
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty cem:hasVictim ;
+                            owl:someValuesFrom sem:Actor
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty cem:how ;
+                            owl:someValuesFrom xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty cem:why ;
+                            owl:someValuesFrom xsd:string
+                          ] ;
+          rdfs:comment "Event subclass to express the crime event."@en .
+
+###  https://dbgroup.ing.unimo.it/cem#Theft
+cem:Theft rdf:type owl:Class ;
+          rdfs:subClassOf cem:CrimeEvent ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty cem:hasStolenObject ;
+                            owl:someValuesFrom xsd:string
+                          ] ;
+          rdfs:comment "CrimeEvent subclass to express thefts."@en .
+
+###  https://dbgroup.ing.unimo.it/cem#hasStolenObject
+cem:hasStolenObject rdf:type owl:DatatypeProperty ;
+                    rdfs:domain cem:Theft ;
+                    rdfs:range xsd:string ;
+                    rdfs:label "has stolen object(s)"@en ;
+                    rdfs:comment "Property to express the stolen object(s) in a theft."@en .
+
+
+###  http://www.w3.org/2002/07/owl#Thing
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( schema:CreativeWork
+                schema:Language
+                schema:Organization
+                schema:Person
+                sem:Place
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( schema:CreativeWork
+                schema:Language
+                sem:Core
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( schema:Date
+                schema:DateTime
+                schema:Text
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( sem:Actor
+                sem:Event
+                sem:Place
+                sem:Time
+              )
+] .
+
+
+
+[ rdf:type owl:AllDisjointProperties ;
+  owl:members ( schema:articleBody
+                schema:containedInPlace
+                schema:containsPlace
+                schema:datePublished
+                schema:headline
+                sem:eventProperty
+                sem:subEventOf
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointProperties ;
+  owl:members ( sem:hasActor
+                sem:hasPlace
+                sem:hasSubEvent
+                sem:hasTime
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointProperties ;
+  owl:members ( sem:hasTimeStamp
+                cem:how
+                cem:success
+                cem:why
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
