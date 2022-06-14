@@ -488,20 +488,35 @@ cem:CrimeEvent rdf:type owl:Class ;
 
 ###  https://dbgroup.ing.unimo.it/cem#Theft
 cem:Theft rdf:type owl:Class ;
-          rdfs:subClassOf cem:CrimeEvent ,
+          rdfs:subClassOf cem:CrimeAgainstProperty ,
                           [ rdf:type owl:Restriction ;
                             owl:onProperty cem:hasStolenObject ;
-                            owl:someValuesFrom xsd:string
+                            owl:someValuesFrom owl:Thing
                           ] ;
-          rdfs:comment "CrimeEvent subclass to express thefts."@en .
+          rdfs:comment "Theft"@en .
 
 ###  https://dbgroup.ing.unimo.it/cem#hasStolenObject
-cem:hasStolenObject rdf:type owl:DatatypeProperty ;
+cem:hasStolenObject rdf:type owl:ObjectProperty ;
                     rdfs:domain cem:Theft ;
-                    rdfs:range xsd:string ;
+                    rdfs:range owl:Thing ;
                     rdfs:label "has stolen object(s)"@en ;
                     rdfs:comment "Property to express the stolen object(s) in a theft."@en .
 
+###  https://dbgroup.ing.unimo.it/cem#Robbery
+cem:Robbery rdf:type owl:Class ;
+          rdfs:subClassOf cem:CrimeAgainstPropertyAndPerson ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty cem:hasWeapon ;
+                            owl:someValuesFrom owl:Thing
+                          ] ;
+          rdfs:comment "Robbery"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#hasStolenObject
+cem:hasWeapon rdf:type owl:ObjectProperty ;
+                    rdfs:domain cem:Robbery ;
+                    rdfs:range owl:Thing ;
+                    rdfs:label "has weapon(s)"@en ;
+                    rdfs:comment "Property to express the weapon(s) used in a robbery."@en .
 
 ###  http://www.w3.org/2002/07/owl#Thing
 
