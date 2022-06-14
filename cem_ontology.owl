@@ -486,6 +486,136 @@ cem:CrimeEvent rdf:type owl:Class ;
                           ] ;
           rdfs:comment "Event subclass to express the crime event."@en .
 
+###  https://dbgroup.ing.unimo.it/cem#Homicide 
+cem:Homicide rdf:type owl:Class ; 
+             rdfs:subClassOf cem:CrimeEvent ; 
+             rdfs:comment "Acts leading to death or intending to cause death"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#CrimeAgainstPerson 
+cem:CrimeAgainstPerson rdf:type owl:Class ; 
+                       rdfs:subClassOf cem:CrimeEvent ; 
+                       rdfs:comment "Acts causing harm or intending to cause harm to the person"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#SexualCrime 
+cem:SexualCrime rdf:type owl:Class ; 
+                rdfs:subClassOf cem:CrimeEvent ; 
+                rdfs:comment "Injurious acts of a sexual nature"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#CrimeAgainstPropertyAndPerson 
+cem:CrimeAgainstPropertyAndPerson rdf:type owl:Class ; 
+                                  rdfs:subClassOf cem:CrimeEvent ; 
+                                  rdfs:comment "Acts against property involving violence or threat against a person"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#CrimeAgainstProperty 
+cem:CrimeAgainstProperty rdf:type owl:Class ; 
+                         rdfs:subClassOf cem:CrimeEvent ; 
+                         rdfs:comment "Acts against property only"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#Drug 
+cem:Drug rdf:type owl:Class ; 
+         rdfs:subClassOf cem:CrimeEvent ; 
+         rdfs:comment "Acts involving controlled drugs or other psychoactive substances"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#CrimeWithDeception 
+cem:CrimeWithDeception rdf:type owl:Class ; 
+                       rdfs:subClassOf cem:CrimeEvent ; 
+                       rdfs:comment "Acts involving fraud, deception or corruption"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#CrimeAgainstPublicOrder 
+cem:CrimeAgainstPublicOrder rdf:type owl:Class ; 
+                            rdfs:subClassOf cem:CrimeEvent ; 
+                            rdfs:comment "Acts against public order, authority, and provisions of the State"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#CrimeAgainstPublicSafety 
+cem:CrimeAgainstPublicSafety rdf:type owl:Class ; 
+                             rdfs:subClassOf cem:CrimeEvent ; 
+                             rdfs:comment "Acts against public safety and state security"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#CrimeAgainstNaturalEnvironment 
+cem:CrimeAgainstNaturalEnvironment rdf:type owl:Class ; 
+                                   rdfs:subClassOf cem:CrimeEvent ; 
+                                   rdfs:comment "Acts against the natural environment "@en .
+
+###  https://dbgroup.ing.unimo.it/cem#OtherCrime 
+cem:OtherCrime rdf:type owl:Class ; 
+               rdfs:subClassOf cem:CrimeEvent ; 
+               rdfs:comment "Other criminal acts not elsewhere classified"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#Assault 
+cem:Assault rdf:type owl:Class ; 
+            rdfs:subClassOf cem:CrimeAgainstPerson ; 
+            rdfs:comment "Assaults and threats"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#Slavery 
+cem:Slavery rdf:type owl:Class ; 
+            rdfs:subClassOf cem:CrimeAgainstPerson ; 
+            rdfs:comment "Slavery and exploitation"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#Intimidation 
+cem:Intimidation rdf:type owl:Class ; 
+                 rdfs:subClassOf cem:CrimeAgainstPerson ; 
+                 rdfs:comment "Acts intended to induce fear or emotional distress"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#Defamation 
+cem:Defamation rdf:type owl:Class ; 
+               rdfs:subClassOf cem:CrimeAgainstPerson ; 
+               rdfs:comment "Defamation or insult"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#Discrimination 
+cem:Discrimination rdf:type owl:Class ; 
+                   rdfs:subClassOf cem:CrimeAgainstPerson ; 
+                   rdfs:comment "Discrimination"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#SexualViolence 
+cem:SexualViolence rdf:type owl:Class ; 
+                   rdfs:subClassOf cem:SexualCrime ; 
+                   rdfs:comment "Sexual violence"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#SexualExploitation 
+cem:SexualExploitation rdf:type owl:Class ; 
+                       rdfs:subClassOf cem:SexualCrime ; 
+                       rdfs:comment "Sexual exploitation"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#Burglary 
+cem:Burglary rdf:type owl:Class ; 
+             rdfs:subClassOf cem:CrimeAgainstProperty ; 
+             rdfs:comment "Burglary"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#PropertyDamage 
+cem:PropertyDamage rdf:type owl:Class ; 
+                   rdfs:subClassOf cem:CrimeAgainstProperty ; 
+                   rdfs:comment "Property damage"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#Fraud 
+cem:Fraud rdf:type owl:Class ; 
+          rdfs:subClassOf cem:CrimeWithDeception ; 
+          rdfs:comment "Fraud"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#Forgery 
+cem:Forgery rdf:type owl:Class ; 
+            rdfs:subClassOf cem:CrimeWithDeception ; 
+            rdfs:comment "Forgery/counterfeiting"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#Corruption 
+cem:Corruption rdf:type owl:Class ; 
+               rdfs:subClassOf cem:CrimeWithDeception ; 
+               rdfs:comment "Corruption"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#CrimeProceeds 
+cem:CrimeProceeds rdf:type owl:Class ; 
+                  rdfs:subClassOf cem:CrimeWithDeception ; 
+                  rdfs:comment "Acts involving proceeds of crime"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#MoneyLaundering 
+cem:MoneyLaundering rdf:type owl:Class ; 
+                    rdfs:subClassOf cem:CrimeProceeds ; 
+                    rdfs:comment "Money laundering"@en .
+
+###  https://dbgroup.ing.unimo.it/cem#TaxEvasion 
+cem:TaxEvasion rdf:type owl:Class ; 
+               rdfs:subClassOf cem:CrimeAgainstPublicOrder ; 
+               rdfs:comment "Acts contrary to public revenue or regulatory provisions"@en .
+
 ###  https://dbgroup.ing.unimo.it/cem#Theft
 cem:Theft rdf:type owl:Class ;
           rdfs:subClassOf cem:CrimeAgainstProperty ,
